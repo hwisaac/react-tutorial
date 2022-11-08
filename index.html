@@ -18,51 +18,8 @@
     <div class="root"></div>
 
     <script type="text/babel">
-      const root = document.querySelector(".root");
       const App = () => {
-        const [amount, setAmount] = React.useState(0);
-        const [flipped, setFlipped] = React.useState(false);
-        const onChange = (event) => {
-          setAmount(event.target.value);
-        };
-        const changeHour = () => {};
-        const reset = () => {
-          setAmount(0);
-        };
-        const onFlip = () => {
-          setFlipped((current) => !current);
-          reset();
-        };
-
-        return (
-          <div>
-            <h1>Super Converter</h1>
-            <div>
-              <label htmlFor='minutes'>Minutes</label>
-              <input
-                id='minutes'
-                type='number'
-                placeholder='Minutes'
-                value={!flipped ? amount : amount * 60}
-                onChange={onChange} // onChange 를 지우면 amount=0 값으로 고정됨.
-                disabled={flipped === true}
-              />
-            </div>
-            <div>
-              <label htmlFor='hours'>Hours</label>
-              <input
-                id='hours'
-                value={flipped ? amount : Math.round(amount / 60)}
-                type='number'
-                placeholder='Hours'
-                onChange={onChange}
-                disabled={flipped === false}
-              />
-            </div>
-            <button onClick={reset}>Reset</button>
-            <button onClick={onFlip}>Flipped</button>
-          </div>
-        );
+        return <div></div>;
       };
 
       ReactDOM.render(<App />, root);

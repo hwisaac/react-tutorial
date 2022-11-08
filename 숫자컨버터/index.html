@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Document</title>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      src="https://unpkg.com/react@18/umd/react.development.js"
+      crossorigin></script>
+    <script
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+      crossorigin></script>
+  </head>
+  <body>
+    <div class="root"></div>
+
+    <script type="text/babel">
+      const root = document.querySelector(".root");
+      const MinutesToHours = () => {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        const onChange = (event) => {
+          setAmount(event.target.value);
+        };
+        const changeHour = () => {};
+        const reset = () => {
+          setAmount(0);
+        };
+        const onFlip = () => {
+          setFlipped((current) => !current);
+          reset();
+        };
+
+        return (
+          <div>
+            <div>
+              <label htmlFor='minutes'>Minutes</label>
+              <input
+                id='minutes'
+                type='number'
+                placeholder='Minutes'
+                value={!flipped ? amount : amount * 60}
+                onChange={onChange} // onChange 를 지우면 amount=0 값으로 고정됨.
+                disabled={flipped === true}
+              />
+            </div>
+            <div>
+              <label htmlFor='hours'>Hours</label>
+              <input
+                id='hours'
+                value={flipped ? amount : Math.round(amount / 60)}
+                type='number'
+                placeholder='Hours'
+                onChange={onChange}
+                disabled={flipped === false}
+              />
+            </div>
+            <button onClick={reset}>Reset</button>
+            <button onClick={onFlip}>Flipped</button>
+          </div>
+        );
+      };
+      const KmToMiles = () => {
+        return <h3>Km to miles</h3>;
+      };
+      const App = () => {
+        const [index, setIndex] = React.useState("0");
+        const onSelect = (event) => {
+          setIndex(event.target.value);
+        };
+        console.log(index);
+        return (
+          <div>
+            <h1>Super Convderter</h1>
+            <select value={index} onChange={onSelect}>
+              <option value='0'>Minutes & Hours</option>
+              <option value='1'>Km & Miles</option>
+            </select>
+            <hr />
+            {index === "0" ? <MinutesToHours /> : null}
+            {index === "1" ? <KmToMiles /> : null}
+          </div>
+        );
+      };
+
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
